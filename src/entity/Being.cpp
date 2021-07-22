@@ -11,33 +11,47 @@ Being::~Being(void)
   std::cout << "Destructor Being\n";
 }
 
-int Being::update(void)
+int Being::update(unsigned int indice)
 {
   std::cout << name << " : " << life << "LP\n";
   return -1;
 }
 
-void Being::targetAttack(Being *being)
+void Being::targetAttack(void)
 {
-  being->setLife(being->getLife() - dommage);
+  std::cout << name << " attaque " << target->getName() << " : -" << dommage << "LP\n";
+  target->setTarget(this);
+  target->setLife(target->getLife() - dommage);
 }
 
 // getter & setter
 std::string Being::getName(void) const
 {
-  return this->name;
+  return name;
 }
 
-unsigned int Being::getLife(void) const
+int Being::getLife(void) const
 {
-  return this->life;
+  return life;
 }
 
-void Being::setLife(unsigned int life)
+void Being::setLife(int life)
 {
   if (life <= 0)
   {
+    std::cout << name << " est mort\n";
     life = 0;
+    currentState = dead;
   }
   this->life = life;
-};
+}
+
+void Being::setTarget(Being *target)
+{
+  this->target = target;
+}
+
+Being *Being::getTarget(void) const
+{
+  return target;
+}

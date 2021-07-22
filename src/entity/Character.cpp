@@ -19,7 +19,7 @@ Character::~Character(void)
   std::cout << "Destructor Character\n";
 }
 
-int Character::update(void)
+int Character::update(unsigned int indice)
 {
   int action = -1;
   int random = -1;
@@ -27,11 +27,11 @@ int Character::update(void)
   switch (currentState)
   {
   case idle:
-    Being::update();
+    Being::update(indice);
     std::cout << "Que veux tu faire ?\n";
     std::cout << "0 -> quitter le jeu\n";
     std::cout << "1 -> marcher\n";
-    std::cout << "2 -> attacker\n";
+    std::cout << "2 -> attaquer\n";
     std::cin >> action;
 
     if (action == 1)
@@ -45,13 +45,13 @@ int Character::update(void)
     break;
   case walk:
     std::cout << name << " marche..\n";
-    random = Random::intInRange(0, 5);
+    random = Random::intInRange(0, 3);
     if (random == 0)
     {
       std::cout << "Monstre rencontré!\n";
       Monster *monster = new Monster(beingList);
       beingList->push_back(monster);
-      target = monster;
+      setTarget(monster);
     }
 
     currentState = idle;
@@ -59,10 +59,12 @@ int Character::update(void)
   case attack:
     if (target != nullptr)
     {
-      targetAttack(target);
+      targetAttack();
     }
 
     currentState = idle;
+    break;
+  case dead:
     break;
   }
 

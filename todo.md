@@ -1,10 +1,8 @@
    # attribut personnage a faire
 
     ```
-        int vie;//definit le nombre de pv.
     int niveau;//donne des niveux pour augmenter les niveaux des competences .
     int experiences;//avec un certain nombre d´experience nous gagnons un niveau , pour gagner de l´experience il faut tuer des monstres .
-    int pseudo;//sert a donner un nom a notre personage ou a notre monture  ou a notre monstre .
     int positionX;
     int positionY;
 

@@ -34,7 +34,7 @@ void Application::update(void)
   {
     for (unsigned int i = 0; i < beingList.size(); ++i)
     {
-      if (beingList.at(i)->update() == 0)
+      if (beingList.at(i)->update(i) == 0)
       {
         end = true;
       }

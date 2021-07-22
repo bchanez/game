@@ -11,7 +11,7 @@ class Character : public Being
 public:
   explicit Character(std::vector<Being *> *beingList);
   virtual ~Character();
-  virtual int update(void) override;
+  virtual int update(unsigned int indice) override;
 
 private:
 };

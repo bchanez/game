@@ -16,18 +16,29 @@ Monster::~Monster(void)
   std::cout << "Destructor Monster\n";
 }
 
-int Monster::update(void)
+int Monster::update(unsigned int indice)
 {
   switch (currentState)
   {
   case idle:
-    Being::update();
+    Being::update(indice);
+    if (target != nullptr)
+    {
+      currentState = attack;
+    }
     break;
   case walk:
     currentState = idle;
     break;
   case attack:
+    targetAttack();
+
     currentState = idle;
+    break;
+  case dead:
+    getTarget()->setTarget(nullptr);
+    delete this;
+    beingList->erase(beingList->begin() + indice);
     break;
   }
 

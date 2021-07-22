@@ -9,7 +9,7 @@ class Monster : public Being
 public:
   explicit Monster(std::vector<Being *> *beingList);
   virtual ~Monster();
-  virtual int update(void) override;
+  virtual int update(unsigned int indice) override;
 
 private:
 };
