@@ -15,7 +15,7 @@ SRC := $(shell find $(DIRECSRC) -name '*.cpp')
 OBJ := $(SRC:.cpp=.o)
 
 
-all: $(EXENAME) install
+all: clean $(EXENAME) install execute
 
 $(EXENAME): $(OBJ)
 	@echo "** Building the game"
@@ -25,17 +25,21 @@ $(EXENAME): $(OBJ)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 install:
-	@echo "** Installing..."
+	@echo "** Installing"
 	sh ./rsc/tools/create_directories.sh
 	cp $(DIRECSRC)/$(EXENAME) $(DIRECBIN)
 	cp $(OBJ) $(DIRECOBJ)
 	chmod u+x $(DIRECBIN)/$(EXENAME)
 
 clean:
-	@echo "** Removing object files and executable..."
+	@echo "** Removing object files and executable"
 	rm -f $(OBJ)
 	rm -f $(DIRECSRC)/$(EXENAME)
 
 execute:
-	@echo "** start the game.."
+	@echo "** start the game"
 	$(DIRECBIN)/$(EXENAME) $(ARG)
+
+valgrind:
+	@echo "** valgrind start"
+	valgrind $(DIRECBIN)/$(EXENAME) $(ARG)

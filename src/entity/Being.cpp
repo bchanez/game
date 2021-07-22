@@ -11,23 +11,29 @@ Being::~Being(void)
   std::cout << "Destructor Being\n";
 }
 
+int Being::update(void)
+{
+  std::cout << name << " : " << life << "LP\n";
+  return -1;
+}
+
 void Being::targetAttack(Being *being)
 {
   being->setLife(being->getLife() - dommage);
 }
 
 // getter & setter
-std::string Being::getName(void)
+std::string Being::getName(void) const
 {
   return this->name;
 }
 
-int Being::getLife(void)
+unsigned int Being::getLife(void) const
 {
   return this->life;
 }
 
-void Being::setLife(int life)
+void Being::setLife(unsigned int life)
 {
   if (life <= 0)
   {
